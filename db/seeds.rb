@@ -17,7 +17,7 @@ Post.create(position_name: "平社員")
     family_name: Faker::Name.last_name,
     given_name: Faker::Name.first_name,
     email: Faker::Internet.email,
-    company_id: rand(3) + 1
+    company_id: rand(3) + 1,
     post_id: rand(1..4)
   )
 end
