@@ -1,11 +1,12 @@
 class CustomersController < ApplicationController
+before_action :authenticate_user!
 before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
   def index
     # @customers = Customer.page(params[:page])
      #@q = Customer.ransack(params[:q])
     # @customers = @q.result.page(params[:page])
-    @q = Customer.includes(:post, :company).ransack(params[:q])
+    @q = Customer.includes(:post, :company, :comments).ransack(params[:q])
     @customers = @q.result.page(params[:page])
   end
 
@@ -36,7 +37,10 @@ before_action :set_customer, only: [:show, :edit, :update, :destroy]
   end
 
   def show
-
+    @customer = Customer.find(params[:id])
+    @comment = Comment.new # これをform_withで使う
+    #@comments = Comment.where(customer_id: params[:id].to_i)
+    @comments = @customer.comments
   end
 
   def destroy
