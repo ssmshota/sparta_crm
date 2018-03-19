@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
 before_action :authenticate_user!
-before_action :set_customer, only: [:show, :edit, :update, :destroy]
+before_action :set_customer, only: [:show, :edit, :update, :destroy] #追加
 
   def index
     # @customers = Customer.page(params[:page])
